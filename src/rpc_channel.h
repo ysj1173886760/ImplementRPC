@@ -1,3 +1,13 @@
+/**
+ * @file rpc_channel.h
+ * @author sheep
+ * @brief header of TinyChannel
+ * @version 0.1
+ * @date 2022-04-13
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef RPC_CHANNEL_H
 #define RPC_CHANNEL_H
 

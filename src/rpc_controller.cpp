@@ -1,3 +1,14 @@
+/**
+ * @file rpc_controller.cpp
+ * @author sheep
+ * @brief implementation of TinyRpcController
+ * @version 0.1
+ * @date 2022-04-13
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 #include "rpc_controller.h"
 
 // reset the error code
