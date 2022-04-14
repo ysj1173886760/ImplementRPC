@@ -96,6 +96,50 @@ void TinyRpcServer::worker_thread() {
 }
 
 void TinyRpcServer::work(int fd) {
-    RpcMeta rpc_meta;
-    // rpc_meta.set_service_id()
+    // we shall keep the connection until client has closed it
+    while (true) {
+        RpcMeta rpc_meta;
+        
+        // read size
+        char meta_size_buffer[sizeof(int)];
+        if (recv(fd, meta_size_buffer, 4, MSG_WAITALL) == -1) {
+            return;
+        }
+        int meta_size = *((int *)meta_size_buffer);
+
+        // read meta data
+        std::string meta_buffer;
+        meta_buffer.resize(meta_size);
+        if (recv(fd, meta_buffer.data(), meta_size, MSG_WAITALL) == -1) {
+            return;
+        }
+
+        // parse meta data
+        rpc_meta.ParseFromString(meta_buffer);
+
+        // read request data
+        std::string request_buffer;
+        request_buffer.resize(rpc_meta.data_size());
+        if (recv(fd, request_buffer.data(), rpc_meta.data_size(), MSG_WAITALL) == -1) {
+            return;
+        }
+
+        LOG_INFO("received request");
+        LOG_INFO("service_name: %s", rpc_meta.service_name().c_str());
+        LOG_INFO("method name: %s", rpc_meta.service_name().c_str());
+        LOG_INFO("meta data size: %d", meta_size);
+        LOG_INFO("request size: %d", rpc_meta.data_size());
+
+        // then parse the request data based on the request
+        ::google::protobuf::Service *service = 
+            service_lookup_tbl_[rpc_meta.service_name()].service_;
+        const ::google::protobuf::MethodDescriptor *method_descriptor = 
+            service_lookup_tbl_[rpc_meta.service_name()].method_lookup_tbl_[rpc_meta.method_name()];
+        
+        auto request_msg = service->GetRequestPrototype(method_descriptor).New();
+        auto response_msg = service->GetResponsePrototype(method_descriptor).New();
+        request_msg->ParseFromString(request_buffer);
+
+        // then call the real code
+    }
 }

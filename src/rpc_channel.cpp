@@ -100,6 +100,6 @@ void TinyChannel::CallMethod(const ::google::protobuf::MethodDescriptor* method,
     resp_buffer.resize(resp_len);
 
     // bio here, recv the data
-    recv(socket_, (void *)resp_buffer.c_str(), resp_len, MSG_WAITALL);
+    recv(socket_, resp_buffer.data(), resp_len, MSG_WAITALL);
     response->ParseFromString(resp_buffer);
 }
