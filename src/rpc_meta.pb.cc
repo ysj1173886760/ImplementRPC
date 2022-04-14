@@ -51,8 +51,8 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_PROTOBUF_ATTRIBUT
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::RpcMeta, service_id_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::RpcMeta, method_id_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::RpcMeta, service_name_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::RpcMeta, method_name_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(::RpcMeta, data_size_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
@@ -84,12 +84,12 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-      "\n\016rpc_meta.proto\"C\n\007RpcMeta\022\022\n\nservice_i"
-      "d\030\001 \001(\t\022\021\n\tmethod_id\030\002 \001(\t\022\021\n\tdata_size\030"
-      "\003 \001(\005b\006proto3"
+      "\n\016rpc_meta.proto\"G\n\007RpcMeta\022\024\n\014service_n"
+      "ame\030\001 \001(\t\022\023\n\013method_name\030\002 \001(\t\022\021\n\tdata_s"
+      "ize\030\003 \001(\005b\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 93);
+      descriptor, 97);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "rpc_meta.proto", &protobuf_RegisterTypes);
 }
@@ -111,8 +111,8 @@ struct StaticDescriptorInitializer {
 void RpcMeta::InitAsDefaultInstance() {
 }
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int RpcMeta::kServiceIdFieldNumber;
-const int RpcMeta::kMethodIdFieldNumber;
+const int RpcMeta::kServiceNameFieldNumber;
+const int RpcMeta::kMethodNameFieldNumber;
 const int RpcMeta::kDataSizeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -127,21 +127,21 @@ RpcMeta::RpcMeta(const RpcMeta& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  service_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.service_id().size() > 0) {
-    service_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.service_id_);
+  service_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.service_name().size() > 0) {
+    service_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.service_name_);
   }
-  method_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.method_id().size() > 0) {
-    method_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.method_id_);
+  method_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.method_name().size() > 0) {
+    method_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.method_name_);
   }
   data_size_ = from.data_size_;
   // @@protoc_insertion_point(copy_constructor:RpcMeta)
 }
 
 void RpcMeta::SharedCtor() {
-  service_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  method_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  service_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  method_name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   data_size_ = 0;
 }
 
@@ -151,8 +151,8 @@ RpcMeta::~RpcMeta() {
 }
 
 void RpcMeta::SharedDtor() {
-  service_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  method_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  service_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  method_name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void RpcMeta::SetCachedSize(int size) const {
@@ -175,8 +175,8 @@ void RpcMeta::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  service_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  method_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  service_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  method_name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   data_size_ = 0;
   _internal_metadata_.Clear();
 }
@@ -191,32 +191,32 @@ bool RpcMeta::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string service_id = 1;
+      // string service_name = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_service_id()));
+                input, this->mutable_service_name()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->service_id().data(), static_cast<int>(this->service_id().length()),
+            this->service_name().data(), static_cast<int>(this->service_name().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "RpcMeta.service_id"));
+            "RpcMeta.service_name"));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // string method_id = 2;
+      // string method_name = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_method_id()));
+                input, this->mutable_method_name()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->method_id().data(), static_cast<int>(this->method_id().length()),
+            this->method_name().data(), static_cast<int>(this->method_name().length()),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "RpcMeta.method_id"));
+            "RpcMeta.method_name"));
         } else {
           goto handle_unusual;
         }
@@ -263,24 +263,24 @@ void RpcMeta::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string service_id = 1;
-  if (this->service_id().size() > 0) {
+  // string service_name = 1;
+  if (this->service_name().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->service_id().data(), static_cast<int>(this->service_id().length()),
+      this->service_name().data(), static_cast<int>(this->service_name().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "RpcMeta.service_id");
+      "RpcMeta.service_name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->service_id(), output);
+      1, this->service_name(), output);
   }
 
-  // string method_id = 2;
-  if (this->method_id().size() > 0) {
+  // string method_name = 2;
+  if (this->method_name().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->method_id().data(), static_cast<int>(this->method_id().length()),
+      this->method_name().data(), static_cast<int>(this->method_name().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "RpcMeta.method_id");
+      "RpcMeta.method_name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->method_id(), output);
+      2, this->method_name(), output);
   }
 
   // int32 data_size = 3;
@@ -302,26 +302,26 @@ void RpcMeta::SerializeWithCachedSizes(
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string service_id = 1;
-  if (this->service_id().size() > 0) {
+  // string service_name = 1;
+  if (this->service_name().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->service_id().data(), static_cast<int>(this->service_id().length()),
+      this->service_name().data(), static_cast<int>(this->service_name().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "RpcMeta.service_id");
+      "RpcMeta.service_name");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->service_id(), target);
+        1, this->service_name(), target);
   }
 
-  // string method_id = 2;
-  if (this->method_id().size() > 0) {
+  // string method_name = 2;
+  if (this->method_name().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->method_id().data(), static_cast<int>(this->method_id().length()),
+      this->method_name().data(), static_cast<int>(this->method_name().length()),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "RpcMeta.method_id");
+      "RpcMeta.method_name");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->method_id(), target);
+        2, this->method_name(), target);
   }
 
   // int32 data_size = 3;
@@ -346,18 +346,18 @@ size_t RpcMeta::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
   }
-  // string service_id = 1;
-  if (this->service_id().size() > 0) {
+  // string service_name = 1;
+  if (this->service_name().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->service_id());
+        this->service_name());
   }
 
-  // string method_id = 2;
-  if (this->method_id().size() > 0) {
+  // string method_name = 2;
+  if (this->method_name().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->method_id());
+        this->method_name());
   }
 
   // int32 data_size = 3;
@@ -394,13 +394,13 @@ void RpcMeta::MergeFrom(const RpcMeta& from) {
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from.service_id().size() > 0) {
+  if (from.service_name().size() > 0) {
 
-    service_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.service_id_);
+    service_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.service_name_);
   }
-  if (from.method_id().size() > 0) {
+  if (from.method_name().size() > 0) {
 
-    method_id_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.method_id_);
+    method_name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.method_name_);
   }
   if (from.data_size() != 0) {
     set_data_size(from.data_size());
@@ -431,9 +431,9 @@ void RpcMeta::Swap(RpcMeta* other) {
 }
 void RpcMeta::InternalSwap(RpcMeta* other) {
   using std::swap;
-  service_id_.Swap(&other->service_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  service_name_.Swap(&other->service_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  method_id_.Swap(&other->method_id_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  method_name_.Swap(&other->method_name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(data_size_, other->data_size_);
   _internal_metadata_.Swap(&other->_internal_metadata_);

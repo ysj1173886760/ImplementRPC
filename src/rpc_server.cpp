@@ -11,6 +11,7 @@
 
 #include "rpc_server.h"
 #include "logger.h"
+#include "rpc_meta.pb.h"
 
 #include <google/protobuf/service.h>
 #include <google/protobuf/descriptor.h>
@@ -33,14 +34,14 @@ void TinyRpcServer::start(int port) {
 
     // Creating socket file descriptor
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
-        LOG_INFO("socket failed");
+        LOG_ERROR("socket failed");
         exit(EXIT_FAILURE);
     }
        
     // Forcefully attaching socket to the port
     if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,
                                                   &opt, sizeof(opt))) {
-        LOG_INFO("setsockopt");
+        LOG_ERROR("setsockopt");
         exit(EXIT_FAILURE);
     }
     address.sin_family = AF_INET;
@@ -49,11 +50,11 @@ void TinyRpcServer::start(int port) {
        
     // Forcefully attaching socket to the port
     if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0) {
-        LOG_INFO("bind failed");
+        LOG_ERROR("bind failed");
         exit(EXIT_FAILURE);
     }
     if (listen(server_fd, workers) < 0) {
-        LOG_INFO("listen failed");
+        LOG_ERROR("listen failed");
         exit(EXIT_FAILURE);
     }
 
@@ -95,5 +96,6 @@ void TinyRpcServer::worker_thread() {
 }
 
 void TinyRpcServer::work(int fd) {
-    
+    RpcMeta rpc_meta;
+    // rpc_meta.set_service_id()
 }

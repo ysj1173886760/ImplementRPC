@@ -25,21 +25,26 @@
 class TinyChannel: public ::google::protobuf::RpcChannel {
 public:
     TinyChannel(std::string &server_addr, int port);
-    virtual ~TinyChannel() {}
+    virtual ~TinyChannel();
 
     // Call the given method of the remote service.  The signature of this
     // procedure looks the same as Service::CallMethod(), but the requirements
     // are less strict in one important way:  the request and response objects
     // need not be of any specific class as long as their descriptors are
     // method->input_type() and method->output_type().
-    virtual void CallMethod(const ::google::protobuf::MethodDescriptor* method,
+    void CallMethod(const ::google::protobuf::MethodDescriptor* method,
                             ::google::protobuf::RpcController* controller,
                             const ::google::protobuf::Message* request,
                             ::google::protobuf::Message* response,
-                            ::google::protobuf::Closure* done) = 0;
+                            ::google::protobuf::Closure* done) override;
+    
+    // initialize the socket
+    // because we can't fail in constructor
+    bool Init();
 private:
     std::string server_addr_;
     int port_;
+    int socket_;
 };
 
 #endif
