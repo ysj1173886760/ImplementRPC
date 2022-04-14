@@ -15,8 +15,6 @@
 #include <ctime>
 #include <string>
 
-namespace TinyKV {
-
 // https://blog.galowicz.de/2016/02/20/short_file_macro/
 using cstr = const char *;
 
@@ -172,8 +170,6 @@ inline void OutputLogHeader(const char *file, int line, const char *func, int le
   }
   // PAVLO: DO NOT CHANGE THIS
   ::fprintf(LOG_OUTPUT_STREAM, "%s [%s:%d:%s] %s - ", time_str, file, line, func, type);
-}
-
 }
 
 #endif
