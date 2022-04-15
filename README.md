@@ -11,7 +11,7 @@ make
 
 Then you can run example/client and example/server
 
-This tiny project is aimd to illustrate how RPC works
+This tiny project is aimd to illustrate the procedure of a single RPC call and how it works
 
 ![20220415191202](https://picsheep.oss-cn-beijing.aliyuncs.com/pic/20220415191202.png)
 
