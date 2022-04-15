@@ -15,4 +15,4 @@ message(STATUS "CMAKE_SHARED_LINKER_FLAGS: ${CMAKE_SHARED_LINKER_FLAGS}")
 include_directories(${PROJECT_SOURCE_DIR}/src)
 
 add_subdirectory(src)
-# add_subdirectory(example)
+add_subdirectory(example)
