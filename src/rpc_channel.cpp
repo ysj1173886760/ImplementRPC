@@ -20,7 +20,7 @@
 #include <arpa/inet.h>
 
 
-TinyChannel::TinyChannel(std::string &server_addr, int port) {
+TinyChannel::TinyChannel(std::string server_addr, int port) {
     server_addr_ = server_addr;
     port_ = port;
 }
@@ -52,6 +52,7 @@ bool TinyChannel::Init() {
         LOG_ERROR("Connection Failed");
 		return false;
 	}
+    return true;
 }
 
 void TinyChannel::CallMethod(const ::google::protobuf::MethodDescriptor* method,

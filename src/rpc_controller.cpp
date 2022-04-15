@@ -25,7 +25,7 @@ bool TinyRpcController::Failed() const {
     return is_failed_;
 }
 
-std::string TinyRpcController::ErrorText() {
+std::string TinyRpcController::ErrorText() const {
     return error_code_;
 }
 

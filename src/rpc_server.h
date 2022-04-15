@@ -65,6 +65,7 @@ private:
 
     void worker_thread();
     void work(int fd);
+    void callback(int fd, ::google::protobuf::Message *response_msg);
 };
 
 #endif

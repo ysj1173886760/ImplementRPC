@@ -1,5 +1,3 @@
-set(binary ${CMAKE_PROJECT_NAME})
-
 file(GLOB src_files "*.cpp")
 
 # refering https://github.com/goyas/goya-rpc/blob/master/src/CMakeLists.txt
@@ -17,5 +15,4 @@ endforeach(proto_file)
 
 message(STATUS "proto source files: ${proto_src_files}")
 
-# add_executable(${binary}_exe ${sources})
-add_library(${binary}_lib STATIC ${src_files} ${proto_src_files})
+add_library(${CMAKE_PROJECT_NAME}_lib STATIC ${src_files} ${proto_src_files})

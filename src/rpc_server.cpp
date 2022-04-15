@@ -12,6 +12,7 @@
 #include "rpc_server.h"
 #include "logger.h"
 #include "rpc_meta.pb.h"
+#include "rpc_controller.h"
 
 #include <google/protobuf/service.h>
 #include <google/protobuf/descriptor.h>
@@ -141,5 +142,21 @@ void TinyRpcServer::work(int fd) {
         request_msg->ParseFromString(request_buffer);
 
         // then call the real code
+        auto callback = ::google::protobuf::NewCallback(
+            this, &TinyRpcServer::callback, fd, response_msg);
+        TinyRpcController rpc_controller;
+        service->CallMethod(method_descriptor, &rpc_controller, request_msg, response_msg, callback);
     }
+}
+
+// send the response back to user
+void TinyRpcServer::callback(int fd, ::google::protobuf::Message *response_msg) {
+    int size = response_msg->ByteSize();
+    std::string buffer;
+    // serialize the size
+    buffer += std::string((char *)&size, sizeof(int));
+    // serialize the data
+    buffer += response_msg->SerializeAsString();
+
+    send(fd, buffer.c_str(), buffer.size(), 0);
 }

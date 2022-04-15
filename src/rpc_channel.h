@@ -24,7 +24,7 @@
 //   service->MyMethod(request, &response, callback);
 class TinyChannel: public ::google::protobuf::RpcChannel {
 public:
-    TinyChannel(std::string &server_addr, int port);
+    TinyChannel(std::string server_addr, int port);
     virtual ~TinyChannel();
 
     // Call the given method of the remote service.  The signature of this

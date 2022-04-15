@@ -33,23 +33,23 @@ public:
 
     // Resets the RpcController to its initial state so that it may be reused in
     // a new call.  Must not be called while an RPC is in progress.
-    virtual void Reset();
+    void Reset();
 
     // After a call has finished, returns true if the call failed.  The possible
     // reasons for failure depend on the RPC implementation.  Failed() must not
     // be called before a call has finished.  If Failed() returns true, the
     // contents of the response message are undefined.
-    virtual bool Failed() const;
+    bool Failed() const;
 
     // If Failed() is true, returns a human-readable description of the error.
-    virtual std::string ErrorText();
+    std::string ErrorText() const;
 
     // Advises the RPC system that the caller desires that the RPC call be
     // canceled.  The RPC system may cancel it immediately, may wait awhile and
     // then cancel it, or may not even cancel the call at all.  If the call is
     // canceled, the "done" callback will still be called and the RpcController
     // will indicate that the call failed at that time.
-    virtual void StartCancel();
+    void StartCancel();
 
     // Server-side methods ---------------------------------------------
     // These calls may be made from the server side only.  Their results
@@ -60,12 +60,12 @@ public:
     // you need to return machine-readable information about failures, you
     // should incorporate it into your response protocol buffer and should
     // NOT call SetFailed().
-    virtual void SetFailed(const std::string& reason);
+    void SetFailed(const std::string& reason);
 
     // If true, indicates that the client canceled the RPC, so the server may
     // as well give up on replying to it.  The server should still call the
     // final "done" callback.
-    virtual bool IsCanceled() const = 0;
+    bool IsCanceled() const;
 
     // Asks that the given callback be called when the RPC is canceled.  The
     // callback will always be called exactly once.  If the RPC completes without
@@ -74,7 +74,7 @@ public:
     // will be called immediately.
     //
     // NotifyOnCancel() must be called no more than once per request.
-    virtual void NotifyOnCancel(::google::protobuf::Closure* callback);
+    void NotifyOnCancel(::google::protobuf::Closure* callback);
 
 private:
     bool is_failed_;
